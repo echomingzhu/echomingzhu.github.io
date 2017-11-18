@@ -1,0 +1,794 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="列表和元组都是Python内建的序列，主要区别在于列表可以修改，而元组不可以。接下来我们先探讨下序列的通用操作：索引、分片、加、乘和检查某个元素是否属于序列。 序列通用操作索引序列中的所有元素都是有编号的，和C语言的数组下标一样，都是从0开始递增的。一种惯用法是字符串本身直接使用索引，而不是用一个变量引用他们。 123&amp;gt;&amp;gt;&amp;gt; &quot;echo MingZhu&quot;[3]&apos;o&apos;&amp;gt;&amp;gt">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="列表和元组">
+<meta property="og:url" content="http://yoursite.com/2017/11/18/list_and_tuple/index.html">
+<meta property="og:site_name" content="echo MingZhu&#39;s Blog">
+<meta property="og:description" content="列表和元组都是Python内建的序列，主要区别在于列表可以修改，而元组不可以。接下来我们先探讨下序列的通用操作：索引、分片、加、乘和检查某个元素是否属于序列。 序列通用操作索引序列中的所有元素都是有编号的，和C语言的数组下标一样，都是从0开始递增的。一种惯用法是字符串本身直接使用索引，而不是用一个变量引用他们。 123&amp;gt;&amp;gt;&amp;gt; &quot;echo MingZhu&quot;[3]&apos;o&apos;&amp;gt;&amp;gt">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-18T14:49:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="列表和元组">
+<meta name="twitter:description" content="列表和元组都是Python内建的序列，主要区别在于列表可以修改，而元组不可以。接下来我们先探讨下序列的通用操作：索引、分片、加、乘和检查某个元素是否属于序列。 序列通用操作索引序列中的所有元素都是有编号的，和C语言的数组下标一样，都是从0开始递增的。一种惯用法是字符串本身直接使用索引，而不是用一个变量引用他们。 123&amp;gt;&amp;gt;&amp;gt; &quot;echo MingZhu&quot;[3]&apos;o&apos;&amp;gt;&amp;gt">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'xirong'
+    }
+  };
+</script>
+
+  <title> 列表和元组 | echo MingZhu's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">echo MingZhu's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">热爱健身的程序猿／相信编程是门艺术</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                列表和元组
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-18T17:48:08+08:00" content="2017-11-18">
+              2017-11-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/18/list_and_tuple/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/18/list_and_tuple/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/11/18/list_and_tuple/" class="leancloud_visitors" data-flag-title="列表和元组">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>列表和元组都是Python内建的序列，主要区别在于列表可以修改，而元组不可以。接下来我们先探讨下序列的通用操作：索引、分片、加、乘和检查某个元素是否属于序列。</p>
+<h2 id="序列通用操作"><a href="#序列通用操作" class="headerlink" title="序列通用操作"></a>序列通用操作</h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>序列中的所有元素都是有编号的，和C语言的数组下标一样，都是从0开始递增的。一种惯用法是字符串本身直接使用索引，而不是用一个变量引用他们。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; <span class="string">"echo MingZhu"</span>[3]</div><div class="line"><span class="string">'o'</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<a id="more"></a> 
+<h3 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h3><p>索引用来访问序列中的单个元素，分片操作可以用来访问序列一定范围内的子序列。分片通过冒号分开的两个索引实现。需要注意的是，第一个索引包含在提取的子序列中，第二个索引不包含在子序列中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; str = <span class="string">"echo MingZhu's Blog"</span></div><div class="line">&gt;&gt;&gt; str[5:]</div><div class="line"><span class="string">"MingZhu's Blog"</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="乘"><a href="#乘" class="headerlink" title="乘"></a>乘</h3><p>用数字乘以一个序列会得到一个新的序列。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; [<span class="string">'ming'</span>] * 3</div><div class="line">[<span class="string">'ming'</span>, <span class="string">'ming'</span>, <span class="string">'ming'</span>]</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<p>这里顺便提下None这个Pythn内建值，代表什么都没有，我们可以用该方法初始化一个长度为10，而元素什么都没有（实际上每一个元素都是None）的序列，注意和空序列[]区分。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; [None] * 10</div><div class="line">[None, None, None, None, None, None, None, None, None, None]</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="检查某个成员是否在序列中In"><a href="#检查某个成员是否在序列中In" class="headerlink" title="检查某个成员是否在序列中In"></a>检查某个成员是否在序列中In</h3><p>为了检查某个值是否在序列中，可以使用In运算符。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; seq = [</div><div class="line">... [<span class="string">'ming'</span>, <span class="string">'zhu'</span>],</div><div class="line">... [<span class="string">'echo'</span>, <span class="string">'blog'</span>]</div><div class="line">... ]</div><div class="line">&gt;&gt;&gt; [<span class="string">'ming'</span>, <span class="string">'zhu'</span>] <span class="keyword">in</span> seq</div><div class="line">True</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="Python-List"><a href="#Python-List" class="headerlink" title="Python List"></a>Python List</h2><p>列表作为一种可变的序列，除了拥有序列通用的操作方法之外，python列表还有很多有用的、专门的方法。</p>
+<h3 id="list函数"><a href="#list函数" class="headerlink" title="list函数"></a>list函数</h3><p>list函数可用来把一个序列转化成列表。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; list((<span class="string">'ming'</span>, <span class="string">'zhu'</span>))</div><div class="line">[<span class="string">'ming'</span>, <span class="string">'zhu'</span>]</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="改变列表，元素赋值"><a href="#改变列表，元素赋值" class="headerlink" title="改变列表，元素赋值"></a>改变列表，元素赋值</h3><h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><h3 id="分片赋值"><a href="#分片赋值" class="headerlink" title="分片赋值"></a>分片赋值</h3><p>分片操作强大在于可以使用不等长的序列将分片替换。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; str = <span class="string">"echo MingZhu's web"</span></div><div class="line">&gt;&gt;&gt; temp = list(str)</div><div class="line">&gt;&gt;&gt; temp[-3:] = list(<span class="string">"blog"</span>)</div><div class="line">&gt;&gt;&gt; <span class="string">''</span>.join(temp)</div><div class="line"><span class="string">"echo MingZhu's blog"</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="append方法"><a href="#append方法" class="headerlink" title="append方法"></a>append方法</h3><h3 id="extend方法"><a href="#extend方法" class="headerlink" title="extend方法"></a>extend方法</h3><p>extend 方法用于在列表的末尾一次性追加另一个序列中的多个值<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; str = list(<span class="string">"123"</span>)</div><div class="line">&gt;&gt;&gt; str1 = list(<span class="string">"456"</span>)</div><div class="line">&gt;&gt;&gt; str.extend(str1)</div><div class="line">&gt;&gt;&gt; str</div><div class="line">[<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>]</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="sort方法"><a href="#sort方法" class="headerlink" title="sort方法"></a>sort方法</h3><p>sort方法排序是在原来的位置进行排序，因此对列表使用该方法后原来的列表已经丢失，如果像保留原列表，正确的做法是先使用[:]先得到一份列表副本保留，然后对副本或者原列表进行排序。同时该方法没有返回值，经常犯的一个错误是调用sort方法然后赋值给另一个变量，当然可以通过sorted得到排序好的列表副本。<br>正确的做法1：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; x = [1, 2, 6, 4, 9, 3]</div><div class="line">&gt;&gt;&gt; y = x[:]</div><div class="line">&gt;&gt;&gt; y.sort()</div><div class="line">&gt;&gt;&gt; y</div><div class="line">[1, 2, 3, 4, 6, 9]</div><div class="line">&gt;&gt;&gt; x</div><div class="line">[1, 2, 6, 4, 9, 3]</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<p>正确的做法2:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; x = [1, 2, 6, 4, 9, 3]</div><div class="line">&gt;&gt;&gt; y = sorted(x)</div><div class="line">&gt;&gt;&gt; x</div><div class="line">[1, 2, 6, 4, 9, 3]</div><div class="line">&gt;&gt;&gt; y</div><div class="line">[1, 2, 3, 4, 6, 9]</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<p>错误的做法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; x = [1, 2, 6, 4, 9, 3]</div><div class="line">&gt;&gt;&gt; y = x.sort()</div><div class="line">&gt;&gt;&gt; x</div><div class="line">[1, 2, 3, 4, 6, 9]</div><div class="line">&gt;&gt;&gt; y</div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> y</div><div class="line">None</div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">	友情提示：直接用=号赋值其实是将两个列表指向了同一个位置，如果要等到一个列表的副本需要使用[:]这中方法</div></pre></td></tr></table></figure></p>
+<h2 id="Python元组"><a href="#Python元组" class="headerlink" title="Python元组"></a>Python元组</h2><p>Python 元组是一种不可变的序列。把一个序列转换成元组的的方法是tuple<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; tuple(<span class="string">"ming zhu"</span>)</div><div class="line">(<span class="string">'m'</span>, <span class="string">'i'</span>, <span class="string">'n'</span>, <span class="string">'g'</span>, <span class="string">' '</span>, <span class="string">'z'</span>, <span class="string">'h'</span>, <span class="string">'u'</span>)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/02/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/11/18/list_and_tuple/"
+           data-title="列表和元组" data-url="http://yoursite.com/2017/11/18/list_and_tuple/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/myself.jpeg"
+               alt="echoMingZhu" />
+          <p class="site-author-name" itemprop="name">echoMingZhu</p>
+          <p class="site-description motion-element" itemprop="description">热爱健身的程序猿／相信编程是门艺术</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/echomingzhu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#序列通用操作"><span class="nav-number">1.</span> <span class="nav-text">序列通用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">1.1.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分片"><span class="nav-number">1.2.</span> <span class="nav-text">分片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乘"><span class="nav-number">1.3.</span> <span class="nav-text">乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查某个成员是否在序列中In"><span class="nav-number">1.4.</span> <span class="nav-text">检查某个成员是否在序列中In</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-List"><span class="nav-number">2.</span> <span class="nav-text">Python List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#list函数"><span class="nav-number">2.1.</span> <span class="nav-text">list函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变列表，元素赋值"><span class="nav-number">2.2.</span> <span class="nav-text">改变列表，元素赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除元素"><span class="nav-number">2.3.</span> <span class="nav-text">删除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分片赋值"><span class="nav-number">2.4.</span> <span class="nav-text">分片赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append方法"><span class="nav-number">2.5.</span> <span class="nav-text">append方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extend方法"><span class="nav-number">2.6.</span> <span class="nav-text">extend方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort方法"><span class="nav-number">2.7.</span> <span class="nav-text">sort方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python元组"><span class="nav-number">3.</span> <span class="nav-text">Python元组</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">echoMingZhu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  主题 -
+    NexT.Mist
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"notes-iissnan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("HfEUHBkxIxPKFFWsM8E29K81-gzGzoHsz", "j8gTHCF5cxmeGRbV0QIujeUw");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
